@@ -3,6 +3,9 @@ namespace labration;
 
 public class Program
 {
+
+
+}
     public class Entitet
 {
     public int X { get; set; }
@@ -15,6 +18,4 @@ public class Program
         Y = y;
         Symbol = symbol;
     }
-}
-
 }
