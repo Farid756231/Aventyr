@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Elgiganten\\OneDrive\\Skrivbord\\testing-bara\\testing-bara.csproj",
+      "projectUniqueName": "C:\\Users\\Elgiganten\\OneDrive\\Skrivbord\\Delzar-Farid\\Aventyr\\testing-bara.csproj",
       "projectName": "testing-bara",
-      "projectPath": "C:\\Users\\Elgiganten\\OneDrive\\Skrivbord\\testing-bara\\testing-bara.csproj",
+      "projectPath": "C:\\Users\\Elgiganten\\OneDrive\\Skrivbord\\Delzar-Farid\\Aventyr\\testing-bara.csproj",
       "packagesPath": "C:\\Users\\Elgiganten\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Elgiganten\\OneDrive\\Skrivbord\\testing-bara\\obj\\",
+      "outputPath": "C:\\Users\\Elgiganten\\OneDrive\\Skrivbord\\Delzar-Farid\\Aventyr\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Elgiganten\\AppData\\Roaming\\NuGet\\NuGet.Config",
