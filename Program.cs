@@ -1,4 +1,4 @@
-﻿﻿using System;
+﻿using System;
 namespace labration;
 
 public class Program
@@ -29,4 +29,19 @@ public class Spelare : Entitet
     {
         Livskraft = 100;
     }
+}
+
+public class Förmåga
+{
+    public string Namn { get; set; }
+    public Action<Spelare> Använd { get; set; }
+
+    public Förmåga(string namn, Action<Spelare> använd)
+    {
+        Namn = namn;
+        Använd = använd;
+    }
+
+
+    
 }
