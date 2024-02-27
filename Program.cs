@@ -19,3 +19,14 @@ public class Program
         Symbol = symbol;
     }
 }
+
+
+public class Spelare : Entitet
+{
+    public int Livskraft { get; set; }
+
+    public Spelare(int x, int y, char symbol) : base(x, y, symbol)
+    {
+        Livskraft = 100;
+    }
+}
