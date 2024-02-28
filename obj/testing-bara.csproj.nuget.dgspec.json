@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Delza\\OneDrive\\Skrivbord\\TUC,\\Programmering2\\skolinlämingspel\\Aventyr\\testing-bara.csproj": {}
+    "C:\\Users\\Elgiganten\\OneDrive\\Skrivbord\\Delzar-Farid\\Aventyr\\testing-bara.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Delza\\OneDrive\\Skrivbord\\TUC,\\Programmering2\\skolinlämingspel\\Aventyr\\testing-bara.csproj": {
+    "C:\\Users\\Elgiganten\\OneDrive\\Skrivbord\\Delzar-Farid\\Aventyr\\testing-bara.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Delza\\OneDrive\\Skrivbord\\TUC,\\Programmering2\\skolinlämingspel\\Aventyr\\testing-bara.csproj",
+        "projectUniqueName": "C:\\Users\\Elgiganten\\OneDrive\\Skrivbord\\Delzar-Farid\\Aventyr\\testing-bara.csproj",
         "projectName": "testing-bara",
-        "projectPath": "C:\\Users\\Delza\\OneDrive\\Skrivbord\\TUC,\\Programmering2\\skolinlämingspel\\Aventyr\\testing-bara.csproj",
-        "packagesPath": "C:\\Users\\Delza\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Delza\\OneDrive\\Skrivbord\\TUC,\\Programmering2\\skolinlämingspel\\Aventyr\\obj\\",
+        "projectPath": "C:\\Users\\Elgiganten\\OneDrive\\Skrivbord\\Delzar-Farid\\Aventyr\\testing-bara.csproj",
+        "packagesPath": "C:\\Users\\Elgiganten\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Elgiganten\\OneDrive\\Skrivbord\\Delzar-Farid\\Aventyr\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Delza\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\Elgiganten\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,7 +22,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
