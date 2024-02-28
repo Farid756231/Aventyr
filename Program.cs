@@ -1,4 +1,7 @@
-﻿using System;
+﻿
+
+
+using System;
 namespace labration;
 
 public class Program
@@ -40,6 +43,21 @@ public class Program
         Hälsopaket hälsopaket3 = new Hälsopaket(0, 0, '+', ConsoleColor.Blue);
         PlaceraSlumpmässigtEntitet(spelplan, hälsopaket3);
 
+        Föremål hälsodryck = new Föremål(0, 0, 'H', "Hälsodryck");
+        PlaceraSlumpmässigtEntitet (spelplan, hälsodryck);
+
+        Föremål eldpil = new Föremål(0, 0, 'E', "Eldpil");
+        PlaceraSlumpmässigtEntitet(spelplan, eldpil);
+
+        Föremål rustning = new Föremål(0, 0, 'R', "Rustning");
+        PlaceraSlumpmässigtEntitet(spelplan, rustning);
+
+        Föremål trollstav = new Föremål(0, 0, 'T', "Trollstav");
+        PlaceraSlumpmässigtEntitet(spelplan, trollstav);
+
+        Föremål förstoringsglas = new Föremål(0, 0, 'F', "Förstoringsglas");
+        PlaceraSlumpmässigtEntitet(spelplan, förstoringsglas);
+
         while (true)
 {
     RitaSpelplan(spelplan, spelaren, new List<Varelse> { monster1, monster2, monster3 });
@@ -47,7 +65,7 @@ public class Program
     ConsoleKeyInfo keyInfo = Console.ReadKey();
     HanteraSpelarensDrag(spelplan, keyInfo);
 
-    foreach (Entitet entitet in new List<Entitet> { monster1, monster2, monster3, hälsopaket1, hälsopaket2, hälsopaket3 })
+    foreach (Entitet entitet in new List<Entitet> { monster1, monster2, monster3, hälsopaket1, hälsopaket2, hälsopaket3,hälsodryck, eldpil, rustning, trollstav, förstoringsglas})
     {
         if (spelaren.X == entitet.X && spelaren.Y == entitet.Y)
         {
@@ -65,6 +83,14 @@ public class Program
                 // Uppdatera positionen för hälsopaketet till en ny slumpmässig position
                 PlaceraSlumpmässigtEntitet(spelplan, (Hälsopaket)entitet);
             }
+            else if (entitet is Föremål)
+            {
+                MötFöremål((Föremål)entitet,spelplan);
+
+                // Uppdatera positionen för hälsopaketet till en ny slumpmässig position
+                PlaceraSlumpmässigtEntitet(spelplan, (Föremål)entitet);
+            }
+
 
             RitaSpelplan(spelplan, spelaren, new List<Varelse> { monster1, monster2, monster3 });
         }
@@ -100,13 +126,26 @@ public class Program
     public static void RitaSpelplan(char[,] spelplan,Spelare spelaren, List<Varelse> monsters)
     {
       
+   
     Console.Clear();
 
     int rows = spelplan.GetLength(0);
     int cols = spelplan.GetLength(1);
 
+    // Calculate the maximum symbol width
+    int maxSymbolWidth = 5; // Default width for symbols without special padding
+    foreach (char symbol in new char[] { '@', 'M', '+', 'H', 'E', 'R', 'T', 'F' })
+    {
+        int symbolWidth = symbol == '@' ? 5 : 3; // Adjust width for special symbols like '@'
+        if (symbolWidth > maxSymbolWidth)
+            maxSymbolWidth = symbolWidth;
+    }
+
+    // Calculate the maximum width of a row
+    int maxRowWidth = cols * (maxSymbolWidth + 1) + 1;
+
     // Draw top border
-    Console.WriteLine("+" + new string('-', cols * 3 + 2) + "+");
+    Console.WriteLine("+" + new string('-', maxRowWidth) + "+");
 
     for (int i = 0; i < rows; i++)
     {
@@ -120,32 +159,62 @@ public class Program
             {
                 case '\0':
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.Write("   ");
+                    Console.Write("".PadRight(maxSymbolWidth));
                     break;
                 case '@':
                     Console.ForegroundColor = ConsoleColor.Green;
-                    Console.Write(" @ ");
+                    Console.Write("(@)".PadRight(maxSymbolWidth));
                     break;
                 case 'M':
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.Write(" M ");
+                    Console.Write("<<?>>".PadRight(maxSymbolWidth));
                     break;
                 case '+':
                     Console.ForegroundColor = ConsoleColor.Blue;
-                    Console.Write(" + ");
+                    Console.Write("+".PadRight(maxSymbolWidth));
+                    break;
+                case 'H':
+                    Console.ForegroundColor = ConsoleColor.Magenta;
+                    Console.Write("[o]".PadRight(maxSymbolWidth));
+                    break;
+                case 'E':
+                    Console.ForegroundColor = ConsoleColor.Magenta;
+                    Console.Write("¤¤¤".PadRight(maxSymbolWidth));
+                    break;
+                case 'R':
+                    Console.ForegroundColor = ConsoleColor.Magenta;
+                    Console.Write("--¤--".PadRight(maxSymbolWidth));
+                    break;
+                case 'T':
+                    Console.ForegroundColor = ConsoleColor.Magenta;
+                    Console.Write("//T//".PadRight(maxSymbolWidth));
+                    break;
+                case 'F':
+                    Console.ForegroundColor = ConsoleColor.Magenta;
+                    Console.Write("**F**".PadRight(maxSymbolWidth));
                     break;
             }
         }
-        Console.WriteLine(" |"); // Draw right border
+        Console.WriteLine("                    |"); // Draw right border
     }
 
     // Draw bottom border
-    Console.WriteLine("+" + new string('-', cols * 3 + 2) + "+");
+    Console.WriteLine("+" + new string('-', maxRowWidth) + "+");
 
     // Center-align health message
-    Console.WriteLine($"{"Din hälsa: " + spelaren.Livskraft + " %"}");
+    Console.WriteLine($"{"Din hälsa: " + spelaren.Livskraft + " % \n"}");
 
-     foreach (var monster in monsters)
+    
+ Console.WriteLine("Spelarens väska: ");
+    foreach (var item in spelaren.Väska)
+    {
+        Console.WriteLine($"{item.Namn}: {item.Symbol} ");
+        
+    }
+
+    Console.WriteLine(" \n  ");
+
+    foreach (var monster in monsters)
     {
         Console.WriteLine($"Monster Hälsa ({monster.Symbol}): {monster.Livskraft}%");
     }
@@ -236,6 +305,30 @@ public class Program
         }
     }
 
+   public static void MötFöremål(Föremål föremål, char[,] spelplan)
+        {
+
+            
+            Console.WriteLine($"Du hittade ett föremål: {föremål.Namn}");
+            Console.WriteLine("Tryck 'P' för att plocka upp föremålet.");
+
+            ConsoleKeyInfo keyInfo = Console.ReadKey();
+            if ((keyInfo.KeyChar == 'P' || keyInfo.KeyChar == 'p')&& !spelaren.Väska.Contains(föremål))
+            {
+                spelaren.LäggTillIFörråd(föremål);
+                
+                 for (int y = 0; y < spelplan.GetLength(0); y++)
+                 {
+                   for (int x = 0; x < spelplan.GetLength(1); x++)
+                    {
+                        if (spelplan[y, x] == föremål.Symbol)
+                          {
+                              spelplan[y, x] = '\0';
+                          }
+                    }
+                }
+            }
+        }
 }
     public class Entitet
 {
@@ -255,11 +348,25 @@ public class Program
 public class Spelare : Entitet
 {
     public int Livskraft { get; set; }
+     public List<Föremål> Väska { get; set; }
 
     public Spelare(int x, int y, char symbol) : base(x, y, symbol)
     {
         Livskraft = 100;
+         Väska = new List<Föremål>();
     }
+
+         public void LäggTillIFörråd(Föremål föremål)
+        {
+            Väska.Add(föremål);
+        }
+
+        public void AnvändFöremål(Föremål föremål)
+        {
+            // Implementera logik för att använda föremålet och dess effekter på spelaren
+        }
+
+
 }
 
 
@@ -281,6 +388,23 @@ public class Varelse : Entitet
         Förmågor.Add(förmåga);
     }
 }
+
+public class Föremål : Entitet
+    {
+           private string _namn;
+
+    public string Namn 
+    { 
+        get { return _namn; }
+        set { _namn = value; }
+    }
+
+        public Föremål(int x, int y, char symbol, string namn) : base(x, y, symbol)
+        {
+            Namn = namn;
+        }
+    }
+
 
 public class Förmåga
 {
@@ -311,3 +435,4 @@ public class Hälsopaket : Entitet
         if (spelare.Livskraft > 100);
     }
 }
+
