@@ -1,4 +1,4 @@
-﻿﻿using System;
+﻿using System;
 namespace labration;
 
 public class Program
@@ -16,54 +16,59 @@ public class Program
         spelaren = new Spelare(1, 1, '@');
         PlaceraEntitet(spelplan, spelaren);
 
-        Varelse monster1 = new Varelse(3, 5, 'M', ConsoleColor.Red);
+        Varelse monster1 = new Varelse(0, 0, 'M', ConsoleColor.Red);
         monster1.Livskraft = 100;
         monster1.LäggTillFörmåga(new Förmåga("Sparka", s => { s.Livskraft -= 25; }));
-        PlaceraEntitet(spelplan, monster1);
+        PlaceraSlumpmässigtEntitet(spelplan, monster1);
 
-        Varelse monster2 = new Varelse(7, 2, 'M', ConsoleColor.Red);
+        Varelse monster2 = new Varelse(0, 0, 'M', ConsoleColor.Red);
         monster2.Livskraft = 100;
         monster2.LäggTillFörmåga(new Förmåga("Sparka", s=> { s.Livskraft -= 25; }));
-        PlaceraEntitet(spelplan, monster2);
+        PlaceraSlumpmässigtEntitet(spelplan, monster2);
 
-         Varelse monster3 = new Varelse(5, 4, 'M', ConsoleColor.Red);
+        Varelse monster3 = new Varelse(0, 0, 'M', ConsoleColor.Red);
         monster3.Livskraft = 100;
         monster3.LäggTillFörmåga(new Förmåga("Sparka", s => { s.Livskraft -= 25; }));
-        PlaceraEntitet(spelplan, monster3);
+        PlaceraSlumpmässigtEntitet(spelplan, monster3);
 
+        Hälsopaket hälsopaket1 = new Hälsopaket(0, 0, '+', ConsoleColor.Blue);
+        PlaceraSlumpmässigtEntitet(spelplan, hälsopaket1);
 
-        Hälsopaket hälsopaket1 = new Hälsopaket(5, 8, '+', ConsoleColor.Blue);
-        PlaceraEntitet(spelplan, hälsopaket1);
+        Hälsopaket hälsopaket2 = new Hälsopaket(0, 0, '+', ConsoleColor.Blue);
+        PlaceraSlumpmässigtEntitet(spelplan, hälsopaket2);
 
-          Hälsopaket hälsopaket2 = new Hälsopaket(7, 3, '+', ConsoleColor.Blue);
-        PlaceraEntitet(spelplan, hälsopaket2);
-
-          Hälsopaket hälsopaket3 = new Hälsopaket(2, 8, '+', ConsoleColor.Blue);
-        PlaceraEntitet(spelplan, hälsopaket3);
+        Hälsopaket hälsopaket3 = new Hälsopaket(0, 0, '+', ConsoleColor.Blue);
+        PlaceraSlumpmässigtEntitet(spelplan, hälsopaket3);
 
         while (true)
+{
+    RitaSpelplan(spelplan, spelaren, new List<Varelse> { monster1, monster2, monster3 });
+
+    ConsoleKeyInfo keyInfo = Console.ReadKey();
+    HanteraSpelarensDrag(spelplan, keyInfo);
+
+    foreach (Entitet entitet in new List<Entitet> { monster1, monster2, monster3, hälsopaket1, hälsopaket2, hälsopaket3 })
+    {
+        if (spelaren.X == entitet.X && spelaren.Y == entitet.Y)
         {
-            RitaSpelplan(spelplan,spelaren, new List<Varelse> { monster1, monster2, monster3 });
-
-            ConsoleKeyInfo keyInfo = Console.ReadKey();
-            HanteraSpelarensDrag(spelplan, keyInfo);
-
-            foreach (Entitet entitet in new List<Entitet> { monster1, monster2,monster3, hälsopaket1,hälsopaket2, hälsopaket3 })
+            if (entitet is Varelse)
             {
-                if (spelaren.X == entitet.X && spelaren.Y == entitet.Y)
-                {
-                    if (entitet is Varelse)
-                    {
-                        MötVarelse((Varelse)entitet);
-                    }
-                    else if (entitet is Hälsopaket)
-                    {
-                        MötHälsopaket((Hälsopaket)entitet);
-                    }
+                MötVarelse((Varelse)entitet);
 
-                    RitaSpelplan(spelplan, spelaren, new List<Varelse> { monster1, monster2, monster3 });
-                }
+                // Uppdatera positionen för varelsen till en ny slumpmässig position
+                PlaceraSlumpmässigtEntitet(spelplan, (Varelse)entitet);
             }
+            else if (entitet is Hälsopaket)
+            {
+                MötHälsopaket((Hälsopaket)entitet);
+
+                // Uppdatera positionen för hälsopaketet till en ny slumpmässig position
+                PlaceraSlumpmässigtEntitet(spelplan, (Hälsopaket)entitet);
+            }
+
+            RitaSpelplan(spelplan, spelaren, new List<Varelse> { monster1, monster2, monster3 });
+        }
+    }
 
             if (spelaren.Livskraft <= 0)
             {
@@ -74,6 +79,23 @@ public class Program
             Console.Clear();
         }
     }
+    public static void PlaceraSlumpmässigtEntitet(char[,] spelplan, Entitet entitet)
+{
+    Random random = new Random();
+
+    int x, y;
+    do
+    {
+        x = random.Next(0, spelplan.GetLength(1));
+        y = random.Next(0, spelplan.GetLength(0));
+    } while (spelplan[y, x] != '\0'); // Se till att positionen är tom
+
+    entitet.X = x;
+    entitet.Y = y;
+
+    PlaceraEntitet(spelplan, entitet);
+}
+
 
     public static void RitaSpelplan(char[,] spelplan,Spelare spelaren, List<Varelse> monsters)
     {
