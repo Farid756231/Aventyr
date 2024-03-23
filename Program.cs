@@ -330,19 +330,7 @@ public class Program
             }
         }
 }
-    public class Entitet
-{
-    public int X { get; set; }
-    public int Y { get; set; }
-    public char Symbol { get; set; }
 
-    public Entitet(int x, int y, char symbol)
-    {
-        X = x;
-        Y = y;
-        Symbol = symbol;
-    }
-}
 
 
 public class Spelare : Entitet
@@ -391,7 +379,7 @@ public class Varelse : Entitet
 
 public class Föremål : Entitet
     {
-           private string _namn;
+     private string _namn =null;
 
     public string Namn 
     { 
