@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("testing-bara")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7d69625ad1654c089599b5e6cf7b80803f1bcbde")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c44c5242b2031015c16ed0099eb9a94161116e9f")]
 [assembly: System.Reflection.AssemblyProductAttribute("testing-bara")]
 [assembly: System.Reflection.AssemblyTitleAttribute("testing-bara")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
