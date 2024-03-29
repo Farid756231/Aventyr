@@ -3,6 +3,7 @@ namespace labration;
 
 public class Varelse : Entitet
 {
+   
     public int Livskraft { get; set; }
     public List<Förmåga> Förmågor { get; set; }
     public ConsoleColor Färg { get; set; }
