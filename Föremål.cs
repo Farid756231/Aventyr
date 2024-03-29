@@ -1,8 +1,9 @@
 using System;
 namespace labration;
+
 public class Föremål : Entitet
     {
-     private string _namn =null!;
+           private string _namn;
 
     public string Namn 
     { 
@@ -12,6 +13,7 @@ public class Föremål : Entitet
 
         public Föremål(int x, int y, char symbol, string namn) : base(x, y, symbol)
         {
-            Namn = namn;
+            _namn = namn;
+            
         }
     }
