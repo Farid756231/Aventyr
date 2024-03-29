@@ -339,20 +339,6 @@ public class Program
 
 
 
-public class Förmåga
-{
-    public string Namn { get; set; }
-    public Action<Spelare> Använd { get; set; }
-
-    public Förmåga(string namn, Action<Spelare> använd)
-    {
-        Namn = namn;
-        Använd = använd;
-    }
-
-
-    
-}
 public class Hälsopaket : Entitet
 {
     public Hälsopaket(int x, int y, char symbol, ConsoleColor färg) : base(x, y, symbol)
