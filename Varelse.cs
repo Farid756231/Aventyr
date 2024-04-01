@@ -1,22 +1,26 @@
-using System;
-namespace labration;
+using System; 
 
-public class Varelse : Entitet
+namespace labration
 {
-   
-    public int Livskraft { get; set; }
-    public List<Förmåga> Förmågor { get; set; }
-    public ConsoleColor Färg { get; set; }
-
-    public Varelse(int x, int y, char symbol, ConsoleColor färg) : base(x, y, symbol)
+    public class Varelse : Entitet // Deklarera en klass som heter Varelse och ärver från Entitet
     {
-        Livskraft = 100;
-        Förmågor = new List<Förmåga>();
-        Färg = färg;
-    }
+        // Egenskaper för varelsen
+        public int Livskraft { get; set; } // Livspoängen för varelsen
+        public List<Förmåga> Förmågor { get; set; } // En lista som representerar varelsens förmågor
+        public ConsoleColor Färg { get; set; } // Färgen på varelsens symbol
 
-    public void LäggTillFörmåga(Förmåga förmåga)
-    {
-        Förmågor.Add(förmåga);
+        // Konstruktor för Varelse klassen
+        public Varelse(int x, int y, char symbol, ConsoleColor färg) : base(x, y, symbol)
+        {
+            Livskraft = 100; // Varelsens livskraft sätts till 100 när en ny varelse skapas
+            Förmågor = new List<Förmåga>(); // Skapa en ny tom lista för varelsens förmågor
+            Färg = färg; // Sätt färgen på varelsens symbol
+        }
+
+        // Metod för att lägga till en förmåga till varelsen
+        public void LäggTillFörmåga(Förmåga förmåga)
+        {
+            Förmågor.Add(förmåga);
+        }
     }
 }

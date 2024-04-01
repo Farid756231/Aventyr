@@ -1,20 +1,12 @@
-﻿
-
-
-using System;
+﻿using System;
 namespace labration;
 
 public class Program
 {
-
-    
-
     public static void Main(string[] args)
     {
-       Game game = new Game();
-       game.Start();
-
-      
+        Game game = new Game();
+        game.Start();
     }
 
 }
