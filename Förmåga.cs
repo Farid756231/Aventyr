@@ -1,18 +1,18 @@
-using System;
-namespace labration;
+using System; 
 
-
-public class Förmåga
+namespace labration
 {
-    public string Namn { get; set; }
-    public Action<Spelare> Använd { get; set; }
-
-    public Förmåga(string namn, Action<Spelare> använd)
+    public class Förmåga // Deklarera en klass som heter Förmåga
     {
-        Namn = namn;
-        Använd = använd;
+        // Egenskaper för förmågan
+        public string Namn { get; set; } // Namnet på förmågan
+        public Action<Spelare> Använd { get; set; } // En delegat som representerar hur förmågan används på en spelare
+
+        // Konstruktor för Förmåga klassen
+        public Förmåga(string namn, Action<Spelare> använd)
+        {
+            Namn = namn; // Sätt namnet på förmågan
+            Använd = använd; // Sätt hur förmågan används på en spelare
+        }
     }
-
-
-    
 }
